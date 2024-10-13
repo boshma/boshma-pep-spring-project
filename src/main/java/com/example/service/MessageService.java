@@ -55,7 +55,7 @@ public class MessageService {
         Optional<Message> messageOpt = messageRepository.findById(messageId);
         if (messageOpt.isPresent()) {
             messageRepository.deleteById(messageId);
-            return true; // Message deleted successfully
+            return true; 
         } else {
             return false; // Message not found, but we return true to indicate idempotency
         }

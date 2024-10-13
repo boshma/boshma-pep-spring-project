@@ -65,7 +65,7 @@ public class SocialMediaController {
     @PatchMapping("/messages/{messageId}")
     public ResponseEntity<Integer> updateMessage(@PathVariable Integer messageId, @RequestBody Message updatedMessage) {
         messageService.updateMessage(messageId, updatedMessage.getMessageText());
-        return ResponseEntity.ok(1); // Service will throw if not found or invalid
+        return ResponseEntity.ok(1); //
     }
 
     // GET /accounts/{accountId}/messages - Get all messages by a specific user
