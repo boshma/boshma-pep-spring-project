@@ -51,31 +51,21 @@ public class SocialMediaController {
     @GetMapping("/messages/{messageId}")
     public ResponseEntity<Message> getMessageById(@PathVariable Integer messageId) {
         Message message = messageService.getMessageById(messageId);
-        if (message == null) {
-            return ResponseEntity.ok().body(null);  // Return 200 OK with an empty body if not found
-        } else {
-            return ResponseEntity.ok(message);  // Return the message with 200 OK if found
-        }
+        return ResponseEntity.ok(message);
     }
 
+    // DELETE /messages/{messageId} - Delete a message by ID
     @DeleteMapping("/messages/{messageId}")
     public ResponseEntity<Integer> deleteMessage(@PathVariable Integer messageId) {
         boolean isDeleted = messageService.deleteMessage(messageId);
-        if (isDeleted) {
-            return ResponseEntity.ok(1);  // Return 1 if the message was deleted
-        } else {
-            return ResponseEntity.ok().build();  // Return 200 OK with no body if the message did not exist
-        }
+        return ResponseEntity.ok(isDeleted ? 1 : null); // Return 1 if deleted, null (empty body) if not
     }
 
+    // PATCH /messages/{messageId} - Update a message by ID
     @PatchMapping("/messages/{messageId}")
     public ResponseEntity<Integer> updateMessage(@PathVariable Integer messageId, @RequestBody Message updatedMessage) {
-        Message updated = messageService.updateMessage(messageId, updatedMessage.getMessageText());
-        if (updated != null) {
-            return ResponseEntity.ok(1); // Return 1 row modified
-        } else {
-            return ResponseEntity.notFound().build(); // Return 404 if the message is not found
-        }
+        messageService.updateMessage(messageId, updatedMessage.getMessageText());
+        return ResponseEntity.ok(1); // Service will throw if not found or invalid
     }
 
     // GET /accounts/{accountId}/messages - Get all messages by a specific user

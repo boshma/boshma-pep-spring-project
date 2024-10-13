@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.entity.Message;
 import com.example.exception.BadRequestException;
-import com.example.exception.ResourceNotFoundException;
 import com.example.repository.MessageRepository;
 import com.example.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
